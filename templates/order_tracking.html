@@ -1,0 +1,89 @@
+ {% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+UVID | Contct Us
+{% endblock title %}
+
+{% block content %}     
+
+
+  <section class="hero-wrap " style="background-image: url('{% static 'images/o1.jpg' %}'); height:500px;" data-section="home" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+          <div class="col-md-6 pt-5 ftco-animate">
+          	<div class="mt-5">
+            
+                <h4 style="font-size: 45px; font-weight: bold; color:black;"> Order Tracking Made Easy</h4>
+                   <h4 style="font-weight: bold;"> Follow Your Orders As They Reach You </h4>
+
+                   <br>
+                    <form>
+                      <div class="row">
+                        <div class="col">
+                        
+                         <label style="color:black;">Order ID
+                          <input type="text" class="form-control" placeholder="enter order id">
+                         </label>
+                          <label style="color:black;">Email or Mobile no.
+                            <input type="text" class="form-control" placeholder="enter email"></label>
+                        </div>
+                      </div>
+                    </form>
+                  
+                  <br>
+              <p><a href="#" class="btn btn-dark py-3 px-4">Track Shipment</a>
+                <a href="index.html" class="btn btn-dark py-3 px-4">Cancel</a>
+            
+              </p>
+              
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+<section>
+<div class="w3-container w3-padding-64 w3-center" id="team">
+    <h2 style="color: dodgerblue; font-weight: bold; font-size: 35px;">What Do These Shipment Tracking Terms Mean?</h2>
+<br><br><br>
+    
+    <div class="w4-row"><br>
+    
+    <div class="w3-quarter">
+      <img src="{% static 'images/date.png' %}" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
+      <h3>Estimated Delivery Date</h3>
+      <p>You can expect to receive your order by this date</p>
+    </div>
+    
+    <div class="w3-quarter">
+      <img src="{% static 'images/order.png' %}" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
+      <h3>Order Received</h3>
+      <p>Your order has been received by the courier company and courier tracking has been enabled</p>
+    </div>
+    
+    <div class="w3-quarter">
+      <img src="{% static 'images/picked.png' %}" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
+      <h3>Picked</h3>
+      <p>Your order has been picked up by the courier company mentioned in the Email.</p>
+    </div>
+    
+    <div class="w3-quarter">
+      <img src="{% static 'images/transit.png' %}" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
+      <h3>In Transit</h3>
+      <p>Your order is moving through cities and warehouses</p>
+    </div>
+
+    </div>
+    </div>
+    </section>
+
+
+
+
+{% endblock content %} 

@@ -1,0 +1,94 @@
+ {% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+UVID | Contct Us
+{% endblock title %}
+
+{% block content %}     
+
+
+
+<br><br><br><br>
+
+<div class="page-wrapper  p-t-100 p-b-50"  >
+    <div class="wrapper wrapper--w900">
+        <div class="card card-6">
+            <div class="card-heading">
+          
+            </div>
+            <div class="card-body" style="width: 100%;background-color: #e1f5fe;">
+                <form method="POST">
+
+                  <h2 style="text-align: left; margin-left:20px; color:black; font-weight: bold; font-size:35px;" >Delivery Partner Form</h2>
+                    <div class="form-row">
+                        <div class="name">Full name</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="name">Mobile no.</div>
+                      <div class="value">
+                          <input class="input--style-6" type="text" name="full_name">
+                      </div>
+                  </div>
+               
+                    <div class="form-row">
+                        <div class="name">Email address</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-6" type="email" name="email" placeholder="example@email.com">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Address</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <textarea class="textarea--style-6" name="message" placeholder="Address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Upload driving Licence</div>
+                        <div class="value">
+                            <div class="input-group js-input-file">
+                                <input class="input-file" type="file" name="file_cv" id="file">
+                                <label class="label--file" for="file">Choose file</label>
+                                <span class="input-file__info">No file chosen</span>
+                            </div>
+                           </div>
+
+                           <div class="name">Upload Aadhar card</div>
+                           <div class="value">
+                               <div class="input-group js-input-file">
+                                   <input class="input-file" type="file" name="file_cv" id="file">
+                                   <label class="label--file" for="file">Choose file</label>
+                                   <span class="input-file__info">No file chosen</span>
+                               </div>
+                              </div>
+
+                                       <div class="name">Upload PAN card</div>
+                                       <div class="value">
+                                           <div class="input-group js-input-file">
+                                               <input class="input-file" type="file" name="file_cv" id="file">
+                                               <label class="label--file" for="file">Choose file</label>
+                                               <span class="input-file__info">No file chosen</span>
+                                           </div>
+                                          </div>
+                                         
+                                            
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer" style="width: 100%; background-color: #e1f5fe;">
+                <button class="btn btn--radius-2 btn--blue-2" type="submit">Send Application</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %} 

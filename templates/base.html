@@ -26,6 +26,13 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'css/main1.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'css/main3.css' %}" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="{% static 'css/button.css' %}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   	<div class="py-1 bg-black top">
@@ -51,7 +58,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
-		  <a class="navbar-brand" href="index.html" style="font-size: 40px;">
+		  <a class="navbar-brand" href="{% url 'home' %}" style="font-size: 40px;">
 			<img src="{% static 'images/logo1.jpg' %}" width="100px" height="100px">UVID</a>
 	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
@@ -59,24 +66,24 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+	          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"><span>Home</span></a></li>
 	        
 			
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true"
 					  aria-expanded="false">Services</a>
 					<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1" clas="nav-item" style="background-color: dodgerblue;">
-					  <a class="dropdown-item" href="order.html">My Order</a>
-					  <a class="dropdown-item" href="priscription.html">My prescription</a>
-					  <a class="dropdown-item" href="test.html">Test Booking</a>
+					  <a class="dropdown-item" href="{% url 'order-tracking' %}">My Order</a>
+					  <a class="dropdown-item" href="{% url 'priscription' %}">My prescription</a>
+					  <a class="dropdown-item" href="{% url 'test-booking' %}">Test Booking</a>
 					</div>
 				  </li>
 				  <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true"
 					  aria-expanded="false">Doctors</a>
 					<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1" clas="nav-item" style="background-color: #1e90ff;">
-					  <a class="dropdown-item" href="gdoc.html">Generic</a>
-            <a class="dropdown-item" href="adoctor.html">Ayurvedic</a>
+					  <a class="dropdown-item" href="{% url 'generic' %}">Generic</a>
+            <a class="dropdown-item" href="{% url 'priscription' %}">Ayurvedic</a>
           
 					
 					</div>
@@ -85,8 +92,8 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">Career With Us</a>
             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1" clas="nav-item" style="background-color: #1e90ff;">
-              <a class="dropdown-item" href="kendra.html">Jan Asuhadhi Kendra</a>
-              <a class="dropdown-item" href="delivery.html">Apply For Delivery Partners</a>
+              <a class="dropdown-item" href="{% url 'jan-aushadhi-kendra' %}">Jan Asuhadhi Kendra</a>
+              <a class="dropdown-item" href="{% url 'delivery-partner' %}">Apply For Delivery Partners</a>
             
             
             </div>
@@ -94,166 +101,14 @@
         
 			
 	          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link"><span>Blog</span></a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link"><span>Contact</span></a></li>
-	          
+	          <li class="nav-item"><a href="{% url 'contact-us' %}" class="nav-link"><span>Contact</span></a></li>
+	          <li class="nav-item cta mr-md-2"><a href="{% url 'appointment'%}" class="nav-link">Appointment</a></li>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
   
-{% comment %}     
-	  <section class="hero-wrap js-fullheight" style="background-image: url('{% static 'images/bg_3.jpg'%}');" data-section="home" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
-          <div class="col-md-6 pt-5 ftco-animate">
-          	<div class="mt-5">
-          		<span class="subheading">Welcome to Uvid</span>
-				<h1 class="mb-4">We are here <br>for your Care</h1>
-	        <h4>YoUr Virtual Doctors</h4>
-	            <p><a href="from.html" class="btn btn-primary py-3 px-4">Make an appointment</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-
-    
-<br><br><br>
-    <section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
-    	<div class="container">
-    		<div class="row d-flex">
-    			<div class="col-md-6 col-lg-5 d-flex">
-    				<div class="img d-flex align-self-stretch align-items-center" style="background-image:url('{% static 'images/image_1.jpg' %}');">
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-7 pl-lg-5 py-md-5">
-    				<div class="py-md-5">
-	    				<div class="row justify-content-start pb-3">
-			          <div class="col-md-12 heading-section ftco-animate p-4 p-lg-5">
-			            <h2 class="mb-4">About <span>Uvid</span></h2>
-			            <p>Due to COVID-19 there is a shortage of hospital and unablability of Doctors.For some basic of fle disease we will provide a platefrom to those patient who are suffreing from those diseases.
-							It is virtual service platefrom where patient can communicate with doctors for there symptoms of verious dieases.
-							Our application basically acquire general information ralted to the patient's health condition an provide them a virtual basic support.
-							It will also provide exposure to various generic and ayurvedic consultant.</p>
-			           
-			          </div>
-			        </div>
-		        </div>
-	        </div>
-        </div>
-    	</div>
-    </section>
-
-<br><br>
-    <section class="ftco-intro img" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-9 text-center">
-						<h2>Your Health is Our Priority</h2>
-						
-						<p class="mb-0"><a href="contact.html" class="btn btn-white px-4 py-3">contact us</a></p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-<br><br>
-
-
-	
-   
-	
-
-    <section class="ftco-section testimony-section img" style="background-image: url('{% static 'images/bg_3.jpg' %}');">
-    	<div class="overlay"></div>
-      <div class="container">
-        <div class="row justify-content-center pb-3">
-          <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-          	<span class="subheading">Read testimonials</span>
-            <h2 class="mb-4">Our Patient Says</h2>
-          </div>
-        </div>
-        <div class="row ftco-animate justify-content-center">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel ftco-owl">
-              <div class="item">
-                <div class="testimony-wrap text-center py-4 pb-5">
-                  <div class="user-img" style="background-image: url('{% static 'images/u1.jpg' %}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Nisha</p>
-                    <span class="position">Patients</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap text-center py-4 pb-5">
-                  <div class="user-img" style="background-image: url('{% static 'images/u1.jpg' %}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Nisha</p>
-                    <span class="position">Patients</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap text-center py-4 pb-5">
-                  <div class="user-img" style="background-image: url('{% static 'images/u1.jpg' %}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Nisha</p>
-                    <span class="position">Patients</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap text-center py-4 pb-5">
-                  <div class="user-img" style="background-image: url('{% static 'images/u1.jpg' %}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Nisha</p>
-                    <span class="position">Patients</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap text-center py-4 pb-5">
-                  <div class="user-img" style="background-image: url('{% static 'images/u1.jpg' %}')">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Nisha</p>
-                    <span class="position">Patients</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> {% endcomment %}
 
 {% block content %}
 {% endblock content %}
@@ -344,6 +199,7 @@
   <script src="{% static 'js/google-map.js' %}"></script>
   
   <script src="{% static 'js/main.js' %}"></script>
-    
+  <script src="{% static 'js/global.js' %}"></script>
+  <script src="{% static 'js/global3.js' %}"></script>
   </body>
 </html>
