@@ -45,7 +45,8 @@ UVID | Contct Us
           <div class="card card-6">
              
               <div class="card-body" style="width: 100%;" >
-                  <form method="POST">
+                  <form method="POST" action="/jan_aushadhi_kendra_Save/" enctype="multipart/form-data">
+                  {% csrf_token %}
                     <div class="card-heading">
                       <h2 style="text-align: left; margin-left:20px" >Registration Form</h2>
                   </div>
@@ -53,13 +54,13 @@ UVID | Contct Us
                       <div class="form-row">
                           <div class="name">Full name</div>
                           <div class="value">
-                              <input class="input--style-6" type="text" name="full_name">
+                              <input class="input--style-6" type="text" name="name">
                           </div>
                       </div>
                       <div class="form-row">
                         <div class="name">Mobile no.</div>
                         <div class="value">
-                            <input class="input--style-6" type="text" name="full_name">
+                            <input class="input--style-6" type="text" name="phone">
                         </div>
                     </div>
                  
@@ -75,7 +76,7 @@ UVID | Contct Us
                           <div class="name">Address</div>
                           <div class="value">
                               <div class="input-group">
-                                  <textarea class="textarea--style-6" name="message" placeholder="Address"></textarea>
+                                  <textarea class="textarea--style-6" name="address" placeholder="Address"></textarea>
                               </div>
                           </div>
                       </div>
@@ -83,67 +84,64 @@ UVID | Contct Us
                           <div class="name">Upload Land agreement</div>
                           <div class="value">
                               <div class="input-group js-input-file">
-                                  <input class="input-file" type="file" name="file_cv" id="file">
-                                  <label class="label--file" for="file">Choose file</label>
-                                  <span class="input-file__info">No file chosen</span>
+                                  <input  type="file" name="land_agreement" id="file">
                               </div>
                              </div>
 
                              <div class="name">Upload Aadhar card</div>
                              <div class="value">
                                  <div class="input-group js-input-file">
-                                     <input class="input-file" type="file" name="file_cv" id="file">
+                                 <input type="file"  id="File" name="aadhar_card">
+                                     {% comment %} <input class="input-file" type="file" name="aadhar_card" id="file">
                                      <label class="label--file" for="file">Choose file</label>
-                                     <span class="input-file__info">No file chosen</span>
+                                     <span class="input-file__info">No file chosen</span> {% endcomment %}
                                  </div>
                                 </div>
                                 <div class="name">Upload Status of applicant</div>
                                 <div class="value">
                                     <div class="input-group js-input-file">
-                                        <input class="input-file" type="file" name="file_cv" id="file">
-                                        <label class="label--file" for="file">Choose file</label>
-                                        <span class="input-file__info">No file chosen</span>
+                                        <input  type="file" name="status_of_applicant" id="file">
+                                        
                                     </div>
                                    </div>
                                    <div class="name">Upload Pharmacist certificate</div>
                                    <div class="value">
                                        <div class="input-group js-input-file">
-                                           <input class="input-file" type="file" name="file_cv" id="file">
-                                           <label class="label--file" for="file">Choose file</label>
-                                           <span class="input-file__info">No file chosen</span>
+                                           <input  type="file" name="pharmacist_certificate" id="file">
+                                           
                                        </div>
                                       </div>
                                       <div class="name">Upload Application form</div>
                                       <div class="value">
                                           <div class="input-group js-input-file">
-                                              <input class="input-file" type="file" name="file_cv" id="file">
-                                              <label class="label--file" for="file">Choose file</label>
-                                              <span class="input-file__info">No file chosen</span>
+                                              <input  type="file" name="application_form" id="file">
+                                              
                                           </div>
                                          </div>
                                          <div class="name">Upload PAN card</div>
                                          <div class="value">
                                              <div class="input-group js-input-file">
-                                                 <input class="input-file" type="file" name="file_cv" id="file">
-                                                 <label class="label--file" for="file">Choose file</label>
-                                                 <span class="input-file__info">No file chosen</span>
+                                                 <input  type="file" name="pan_card" id="file">
+                                                 {% comment %} <label class="label--file" for="file">Choose file</label>
+                                                 <span class="input-file__info">No file chosen</span> {% endcomment %}
                                              </div>
                                             </div>
                                             <div class="name">Upload Society registration certificate</div>
                                             <div class="value">
                                                 <div class="input-group js-input-file">
-                                                    <input class="input-file" type="file" name="file_cv" id="file">
-                                                    <label class="label--file" for="file">Choose file</label>
-                                                    <span class="input-file__info">No file chosen</span>
+                                                    <input type="file" name="society_registration_certificate" id="file">
+                                                    {% comment %} <label class="label--file" for="file">Choose file</label>
+                                                    <span class="input-file__info">No file chosen</span> {% endcomment %}
                                                 </div>
                                                </div>
                                               
                       </div>
-                  </form>
-              </div>
-              <div class="card-footer" style="width: 100%;">
+                       <div class="card-footer" style="width: 100%;">
                   <button class="btn btn--radius-2 btn--blue-2" type="submit">Send Application</button>
               </div>
+                  </form>
+              </div>
+             
           </div>
       </div>
   </div>
