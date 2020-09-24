@@ -137,6 +137,8 @@ class Appoitement(models.Model):
     gender = models.CharField(max_length=20, default="")
     email = models.CharField(max_length=50, default="")
     phone_number = models.CharField(max_length = 11 ,default="")
+    department = models.CharField(max_length=50, default="")
+    doctor = models.CharField(max_length=50, default="")
     symptom = models.ImageField(upload_to="images/",default="")
     
     def __str__(self):
@@ -150,22 +152,3 @@ class Member(models.Model):
        def __str__(self):
            return self.residing_country
 
-class Country(models.Model):
-        country= models.CharField(max_length=20)
-
-        def __str__(self):
-            return self.country
-
-class State(models.Model):
-        state=models.CharField(max_length=20)
-        country = models.ForeignKey(Country,on_delete=models.CASCADE,default="") 
-
-        def __str__(self):
-            return self.state      
-
-class City(models.Model):
-    city=models.CharField(max_length=20)
-    state=models.ForeignKey(State, on_delete=models.CASCADE,default="")
-
-    def __str__(self):
-        return self.city

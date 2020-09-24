@@ -20,5 +20,8 @@ urlpatterns = [
     path('login_users/', views.login_users, name="login_users"),
     path('logout_users/', views.logout_users, name="logout_users"),
 
+    path('load-courses/', views.load_courses, name='ajax_load_courses'),
+
+
     
 ]

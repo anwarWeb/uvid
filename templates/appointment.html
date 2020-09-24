@@ -17,7 +17,7 @@ UVID | Appointment
                 <div class="card-body">
                     <h2 class="title text-white"  style="font-size: 35px;">{{msg}}</h2>
                     <h2 class="title text-white"  style="font-size: 35px;">Appointment Form</h2>
-                    <form method="POST" action="/appointment/">
+                    <form method="POST" action="/appointment/" id="indexForm" data-courses-url="{% url 'ajax_load_courses' %}">
                     {% csrf_token %}
                         <div class="row row-space">
                             <div class="col-6">
@@ -25,9 +25,9 @@ UVID | Appointment
                                     <label class="label text-white">first name</label>
 
                                        {% if user.is_authenticated %}
-                                       <input class="input--style-4" onkeypress='charOnly(event)' type="text" name="first_name" value="{{user.first_name}}">
+                                       <input class="input--style-4" type="text" name="first_name" value="{{user.first_name}}" onkeypress='charOnly(event)' required>
                                         {% else %}
-                                       <input class="input--style-4" type="text" name="first_name" value="">
+                                       <input class="input--style-4" type="text" name="first_name" value="" onkeypress='charOnly(event)' required>
                                         {% endif %}
                                     {% comment %} <input class="input--style-4" type="text" name="first_name" value="{{user.firstname}}"> {% endcomment %}
                                 </div>
@@ -36,9 +36,9 @@ UVID | Appointment
                                 <div class="input-group">
                                     <label class="label text-white">last name</label>
                                     {% if user.is_authenticated %}
-                                    <input class="input--style-4" type="text" name="last_name" value="{{user.last_name}}">
+                                    <input class="input--style-4" type="text" name="last_name" value="{{user.last_name}} " onkeypress='charOnly(event)' required>
                                     {% else %}
-                                     <input class="input--style-4" type="text" name="last_name">
+                                     <input class="input--style-4" type="text" name="last_name" onkeypress='charOnly(event)' required>
                                     {% endif %}
                                 </div>
                             </div>
@@ -48,17 +48,16 @@ UVID | Appointment
                                 <div>
                                     <label class="label text-white">Date</label>
                                     <div class="input-group-icon">
-                                        <input class="" type="date" name="Date">
+                                         <input type="date" class="form-control" id="date" name="date" required="required" />
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="col-6">
-                                
                                     <label class="label text-white">Gender</label>
-                                           Male : <input type="radio" checked="checked" name="gender" value="Male">
-                                           Feamle : <input type="radio" name="gender" value="Female">
+                                        <label class="text-white">Male :</label>    <input type="radio" checked="checked" name="gender" value="Male">
+                                        <label class="text-white">Feamle :</label>    <input type="radio" name="gender" value="Female">
                         </div>
                         <div class="row ml-1">
                             <div class="col-6">
@@ -70,11 +69,28 @@ UVID | Appointment
                             <div class="col-6">
                                 <div class="input-group">
                                     <label class="label text-white">Phone Number</label>
-                                    <input class="input--style-4" onkeypress='validate(event)' type="text" name="phone_number">
+                                    <input class="input--style-4" maxlength="10" minlength="8" onkeypress='validate(event)' type="text" name="phone_number">
                                 </div>
                             </div>
                         </div>
                         <Br>
+                        <div class="input-group ml-4">
+                        <div class="col-6">
+                        <label  class="text-white"> Department </label> <br>
+                            
+                            <select name="department" id="department" class="form-control">
+                            <option value = ""> --- Select Department --- </option> 
+                            {% for i in department %} 
+                            <option value = "{{i.id}}"> {{i.name}} </option>
+                            {% endfor %}
+                            </select>
+                            <br><label class="text-white">Doctors</label> 
+                            <select name="doctors" id="doctors" class="form-control">
+                            </select>
+                            </div>
+                        </div>
+                           
+                            </div>
                         <div class="input-group ml-4">
                             <label class="label text-white">Symptoms</label>
                             <div class="col-6">
@@ -91,11 +107,13 @@ UVID | Appointment
                             <button class="btn btn--radius-2 btn--blue" type="submit">Book an Appointment</button>
                            
                         </div>
+                        
+
+
                     </form>
                 </div>
             </div>
         </div>
-        <h1>{{contry}}</h1>
     </div>
     
 {% endblock content %}
@@ -161,11 +179,28 @@ UVID | Appointment
 
         today = yyyy+'-'+mm+'-'+dd;
         document.getElementById("date").setAttribute("min", today);
-
-     
-
-
-        
-
          </script>
+
+         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script> 
+
+$("#department").change(function (){
+    var urlss = $("#indexForm").attr("data-courses-url");
+    var departmentId = $(this).val();
+    
+    $.ajax({
+        url:urlss,
+        data: {
+            'department' : departmentId
+        },
+        success: function(data){
+            $("#doctors").html(data);
+        }
+
+    });
+
+});
+
+</script>
+
 {% endblock js%}
