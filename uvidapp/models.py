@@ -3,7 +3,13 @@ from django.utils.html import mark_safe
 
 # Create your models here.
 
+class Department(models.Model):
+    name = models.CharField(max_length=50,default="")
+    def __str__(self):
+        return self.name
+
 class Doctor(models.Model):
+    department = models.ForeignKey(Department,on_delete=models.CASCADE)
     name= models.CharField(max_length=50,default="")
     doctor_type= models.CharField(max_length=50,choices=[('Generic', 'Generic'), ('Ayurvedic', 'Ayurvedic')])
     description=models.TextField(default="")
@@ -91,4 +97,4 @@ class City(models.Model):
     state=models.ForeignKey(State, on_delete=models.CASCADE,default="")
 
     def __str__(self):
-        return self.city  
+        return self.city

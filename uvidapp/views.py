@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from .models import *
 
 # Create your views here.
 
@@ -31,7 +32,7 @@ def contactSave(request):
 
 
 def appointment(request):
-     country= Country.objects.all() 
+     department = Department.objects.all()
      if request.method=="POST":
         first_name = request.POST.get('first_name', '')
         last_name = request.POST.get('last_name', '')
@@ -45,7 +46,7 @@ def appointment(request):
         appoitement.save()
         msg = "Your appoitment has been done"
         return render(request, 'appointment.html',{'msg':msg})
-     return render(request, 'appointment.html',{'contry':country})
+     return render(request, 'appointment.html',{'departmenet':department})
 
 def orderTracking(request):
     return render(request, 'order_tracking.html')
