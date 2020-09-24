@@ -19,6 +19,13 @@ class Doctor(models.Model):
     def __str__(self):
         return self.name
 
+
+    @property
+    def thumbnail_preview(self):
+        if self.thumbnail:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.thumbnail.url))
+        return ""
+
 class Contact(models.Model):
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=70, default="")
@@ -45,6 +52,51 @@ class Jan_Aushadhi_Registration (models.Model):
     def __str__(self):
         return self.name  
 
+    @property
+    def land_agreement_preview(self):
+        if self.land_agreement:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.land_agreement.url))
+        return ""
+
+    @property
+    def aadhar_card_preview(self):
+        if self.aadhar_card:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.aadhar_card.url))
+        return ""
+
+
+    @property
+    def status_of_applicant_preview(self):
+        if self.status_of_applicant:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.status_of_applicant.url))
+        return ""
+
+    @property
+    def pharmacist_certificate_preview(self):
+        if self.pharmacist_certificate:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.pharmacist_certificate.url))
+        return ""
+
+    @property
+    def application_form_preview(self):
+        if self.application_form:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.application_form.url))
+        return ""
+
+
+    @property
+    def pan_card_preview(self):
+        if self.pan_card:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.pan_card.url))
+        return ""
+
+
+    @property
+    def society_registration_certificate_preview(self):
+        if self.society_registration_certificate:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.society_registration_certificate.url))
+        return ""
+
         
 class DeliveryPartner(models.Model):
     name = models.CharField(max_length=50)
@@ -57,6 +109,25 @@ class DeliveryPartner(models.Model):
     
     def __str__(self):
         return self.name
+
+    @property
+    def driving_licence_preview(self):
+        if self.driving_licence:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.driving_licence.url))
+        return ""
+
+    @property
+    def aadhar_card_preview(self):
+        if self.aadhar_card:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.aadhar_card.url))
+        return ""
+
+
+    @property
+    def pan_card_preview(self):
+        if self.pan_card:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.pan_card.url))
+        return ""
 
 
 class Appoitement(models.Model):

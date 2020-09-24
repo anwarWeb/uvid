@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
-from .models import Contact ,Jan_Aushadhi_Registration, DeliveryPartner,Appoitement,Country
+from .models import Contact, Jan_Aushadhi_Registration, DeliveryPartner, Appoitement, Country, Doctor
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
@@ -58,10 +58,12 @@ def testBooking(request):
      return render(request, 'test_booking.html')
 
 def generic(request):
-     return render(request, 'generic.html') 
+     obj=Doctor.objects.filter(doctor_type='Generic')
+     return render(request, 'generic.html', {'doctors': obj}) 
 
 def ayurvedic(request):
-     return render(request, 'ayurvedic.html') 
+     obj=Doctor.objects.filter(doctor_type='Ayurvedic')
+     return render(request, 'generic.html', {'doctors': obj}) 
 
 def janAsuhadhiKendra(request):
      return render(request, 'jan_asuhadhi_kendra.html') 
