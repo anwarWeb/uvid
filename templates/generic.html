@@ -10,7 +10,7 @@ UVID | Contct Us
 
 
 
-  <section class="hero-wrap js-fullheight" style="background-image: url('{% static 'images/u3.jpg' %}');" data-section="home" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap js-fullheight" style="background-image: url('{% static 'images/u3.jpg' %}');" data-section="home" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
@@ -27,198 +27,48 @@ UVID | Contct Us
 	<section class="ftco-section" id="generic-section">
         <div class="container-fluid px-5">
             <div class="row justify-content-center mb-5 pb-2">
-      <div class="col-md-8 text-center heading-section ftco-animate">
-        <h2 class="mb-4">Our Generic Doctors</h2>
-        <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
-      </div>
-    </div>	
+                <div class="col-md-8 text-center heading-section ftco-animate">
+                    <h2 class="mb-4">Our Generic Doctors</h2>
+                    <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
+                </div>
+            </div>	
+
+          
             <div class="row">
+              {% for doctor in doctors %}
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="staff">
                         <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url('{% static 'images/doc-1.jpg' %}');">
-                              <div>
-                                <span class="indicator online"></span> Online
-                            </div>
+                            <div class="img align-self-stretch" style="background-image: url('/media/{{doctor.thumbnail}}');">
+                           
+                                <div>
+                                {% if doctor.stutas %}
+                                    <span class="indicator online"></span> Online
+
+                                {% else %}
+                                    <span class="indicator offline"></span> Offline
+                                
+                                {% endif %}
+                                </div>
                             </div>
                         </div>
                         <div class="text pt-3 text-center">
-                            <h3 class="mb-2">Dr. Lloyd Wilson</h3>
-                            <span class="position mb-2">Generic</span>
+                            <h3 class="mb-2">{{doctor.name}}</h3>
+                            <span class="position mb-2">{{doctor.doctor_type}}</span>
                             <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                                <p>{{doctor.description}}</p>
                                 <ul class="ftco-social text-center">
                    
-                  </ul>
-                  <p><a href="#" class="btn btn-primary">Book now</a></p>
-              </div>
+                                </ul>
+                                <p><a href="#" class="btn btn-primary">Book now</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url('{% static 'images/doc-2.jpg' %}');">
-                              <div>
-                                <span class="indicator offline"></span> Offline
-                            </div>
-                            </div>
-                        </div>
-                        <div class="text pt-3 text-center">
-                            <h3 class="mb-2">Dr. Rachel Parker</h3>
-                            <span class="position mb-2">Generic</span>
-                            <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-                                <ul class="ftco-social text-center">
-                
-                  </ul>
-                  <p><a href="#" class="btn btn-primary">Book now</a></p>
-              </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url('{% static 'images/doc-3.jpg' %}');">
-                              <div>
-                                <span class="indicator online"></span> Online
-                            </div>
-                            </div>
-                        </div>
-                        <div class="text pt-3 text-center">
-                            <h3 class="mb-2">Dr. Ian Smith</h3>
-                            <span class="position mb-2">Generic</span>
-                            <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-                                <ul class="ftco-social text-center">
-                   
-                  </ul>
-                  <p><a href="#" class="btn btn-primary">Book now</a></p>
-              </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url('{% static 'images/doc-4.jpg' %}');">
-                              <div>
-                                <span class="indicator offline"></span> Offline
-                            </div>
-                            </div>
-                        </div>
-                        <div class="text pt-3 text-center">
-                            <h3 class="mb-2">Dr. Alicia Henderson</h3>
-                            <span class="position mb-2">Generic</span>
-                            <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-                                <ul class="ftco-social text-center">
-                    
-                  </ul>
-                  <p><a href="#" class="btn btn-primary">Book now</a></p>
-              </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {% endfor %}
+            </div> 
         </div>
     </section>
-
-
-            <div class="row">
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url('{% static 'images/doc-1.jpg' %}');">
-                              <div>
-                                <span class="indicator offline"></span> Offline
-                            </div>
-                            </div>
-                        </div>
-                        <div class="text pt-3 text-center">
-                            <h3 class="mb-2">Dr. Lloyd Wilson</h3>
-                            <span class="position mb-2">Generic</span>
-                            <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-                                <ul class="ftco-social text-center">
-                   
-                  </ul>
-                  <p><a href="#" class="btn btn-primary">Book now</a></p>
-              </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url('{% static 'images/doc-2.jpg' %}');">
-                              <div>
-                                <span class="indicator online"></span> Online
-                            </div>
-                            </div>
-                        </div>
-                        <div class="text pt-3 text-center">
-                            <h3 class="mb-2">Dr. Rachel Parker</h3>
-                            <span class="position mb-2">Generic</span>
-                            <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-                                <ul class="ftco-social text-center">
-                
-                  </ul>
-                  <p><a href="#" class="btn btn-primary">Book now</a></p>
-              </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url('{% static 'images/doc-3.jpg' %}');">
-                              <div>
-                                <span class="indicator offline"></span> Offline
-                            </div>
-                            </div>
-                        </div>
-                        <div class="text pt-3 text-center">
-                            <h3 class="mb-2">Dr. Ian Smith</h3>
-                            <span class="position mb-2">Generic</span>
-                            <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-                                <ul class="ftco-social text-center">
-                   
-                  </ul>
-                  <p><a href="#" class="btn btn-primary">Book now</a></p>
-              </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url('{% static 'images/doc-4.jpg' %}');">
-                              <div>
-                                <span class="indicator online"></span> Online
-                            </div>
-                            </div>
-                        </div>
-                        <div class="text pt-3 text-center">
-                            <h3 class="mb-2">Dr. Alicia Henderson</h3>
-                            <span class="position mb-2">Generic</span>
-                            <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-                                <ul class="ftco-social text-center">
-                    
-                  </ul>
-                  <p><a href="#" class="btn btn-primary">Book now</a></p>
-              </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
 
 
