@@ -48,14 +48,25 @@
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
 						    <span class="text">akrison@email.com</span>
 					    </div>
+
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right justify-content-end">
-						    <p class="mb-0 register-link"><a href="#" class="mr-3">Sign Up</a><a href="#">Sign In</a></p>
-					    </div>
+              {% if user.is_authenticated %}
+             <h6> Welcome <b> {{user.first_name}} </b>
+              <a href="/logout_users" class="">&nbsp; &nbsp; Logout</a> </h6>
+              {% else %}
+              <a href="" class="" data-toggle="modal" data-target="#modalLoginForm">Login</a>
+              <span>|</span>
+              <a href="" class="" onclick="$('#yourModal').modal({'backdrop': 'static'});" data-toggle="modal" data-target="#modalSignForm">Sign Up</a>
+						    {% comment %} <p class="mb-0 register-link"><a href="#" class="mr-3">Sign Up</a><a href="#">Sign In</a></p> {% endcomment %}
+					     {% endif %}
+              </div>
 				    </div>
 			    </div>
 		    </div>
 		  </div>
     </div>
+   
+
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
 		  <a class="navbar-brand" href="{% url 'home' %}" style="font-size: 40px;">
@@ -106,12 +117,15 @@
 	        </ul>
 	      </div>
 	    </div>
-	  </nav>
-  
-
-
+    </nav>
+    
 {% block content %}
 {% endblock content %}
+
+{%block js%}
+
+
+{%endblock js%}
 
     <footer class="ftco-footer ftco-section img" style="background-image: url('{% static 'images/footer-bg.jpg' %}');">
     	<div class="overlay"></div>
@@ -177,7 +191,6 @@
       </div>
     </footer>
     
-  
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>

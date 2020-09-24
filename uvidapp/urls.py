@@ -16,5 +16,8 @@ urlpatterns = [
     path('jan_aushadhi_kendra_Save/',views.jan_aushadhi_kendra_Save, name="jan_aushadhi_kendra_Save"),
     path('delivery-partner/', views.deliveryPartner, name="delivery-partner"),
     path('delivery_partner_Save/', views.deliveryPartnerSave, name="delivery_partner_Save"),
+    path('signup/', views.signup, name="signup"),
+    path('login_users/', views.login_users, name="login_users"),
+    path('logout_users/', views.logout_users, name="logout_users"),
     
 ]

@@ -1,14 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.http import HttpResponse
-from .models import Contact ,Jan_Aushadhi_Registration
+from .models import Contact ,Jan_Aushadhi_Registration, DeliveryPartner,Appoitement,Country
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def home(request):
     return render(request, 'home.html')
 
+@login_required(login_url='/logout_users/')
 def blog(request):
     return render(request, 'blog.html')
+
 
 def contact_us(request):
     return render(request, 'contact_us.html')
@@ -23,8 +29,23 @@ def contactSave(request):
         contact.save()
     return render(request,'contact_us.html',{'message':'Message has been send !'})
 
+
 def appointment(request):
-    return render(request, 'appointment.html')
+     country= Country.objects.all() 
+     if request.method=="POST":
+        first_name = request.POST.get('first_name', '')
+        last_name = request.POST.get('last_name', '')
+        Date = request.POST.get('Date', '')
+        gender = request.POST.get('gender', '')
+        email = request.POST.get('email', '')
+        phone_number = request.POST.get('phone_number', '')
+        symptom = request.POST.get('subject', '')
+
+        appoitement = Appoitement(first_name=first_name, last_name=last_name, Date=Date, gender=gender,email=email,phone_number=phone_number,symptom=symptom)
+        appoitement.save()
+        msg = "Your appoitment has been done"
+        return render(request, 'appointment.html',{'msg':msg})
+     return render(request, 'appointment.html',{'contry':country})
 
 def orderTracking(request):
     return render(request, 'order_tracking.html')
@@ -71,7 +92,54 @@ def deliveryPartnerSave(request):
         phone = request.POST.get('phone', '')
         email = request.POST.get('email', '')
         message = request.POST.get('message', '')
-        driving_icence =  request.FILES['driving_icence']
-        aadhar_card =  request.FILES['aadhar_card']
-        pan_card =  request.FILES['pan_card']
+        driving_licence = request.FILES['driving_licence']
+        aadhar_card = request.FILES['aadhar_card']
+        pan_card = request.FILES['pan_card']
+        deliveryPartner = DeliveryPartner(name=name,phone=phone, email=email, message=message, driving_licence=driving_licence, aadhar_card=aadhar_card, pan_card=pan_card,)
+        deliveryPartner.save()
      return render(request,'delivery_partner.html')
+
+def signup(request):
+     if request.method=="POST":
+          username = request.POST['username']
+          email = request.POST['email']
+          fname = request.POST['fname']
+          lname = request.POST['lname']
+          password = request.POST['password']
+
+          if User.objects.filter(email=email):
+               messages.success(request,"Email id is allredy exits")
+
+          else:
+               myuser = User.objects.create_user(username,email,password,is_staff = True)
+               myuser.first_name= fname
+               myuser.last_name= lname
+          
+               myuser.save()
+               messages.success(request,"Account has been successfull")
+               return redirect('home')
+    
+     else:
+          return HttpResponse("404 not found..")
+     return render(request, 'home.html')
+
+
+def login_users(request):
+     if request.method=="POST":
+          loginusername = request.POST['loginusername']
+          loginpassword = request.POST['loginpassword']
+
+     user = authenticate(username=loginusername, password=loginpassword)
+     if user is not None:
+          login (request, user)
+          messages.success(request,"Login Successfully")
+          return redirect('home')
+     else:
+          messages.error(request,"Failed")
+          return redirect('home')
+
+     return render(request, 'home.html')
+
+def logout_users(request):
+     logout(request)
+     return redirect('home')

@@ -9,74 +9,75 @@ UVID | Appointment
 
 {% block content %}     
 
- <div class="page-wrapper  p-t-180 p-b-100 font-poppins" style="background-image: url({% static 'images/a.jpg' %});  background-position: center; background-repeat: no-repeat; background-size: cover; height:100%">
+<div class=" p-t-180 p-b-100 font-poppins" style="background-image: url({% static 'images/a.jpg' %});  background-position: center; background-repeat: no-repeat; background-size: cover; height:100%">
         <br><br>
-        <div class="wrapper wrapper--w680">
+        <div class="">
             <div class="card card-4" style="background-color: darkslategray; color:black;">
+                
                 <div class="card-body">
-                    <h2 class="title"  style="font-size: 35px;">Appointment Form</h2>
-                    <form method="POST">
+                    <h2 class="title text-white"  style="font-size: 35px;">{{msg}}</h2>
+                    <h2 class="title text-white"  style="font-size: 35px;">Appointment Form</h2>
+                    <form method="POST" action="/appointment/">
+                    {% csrf_token %}
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
-                                    <label class="label">first name</label>
-                                    <input class="input--style-4" type="text" name="first_name">
+                                    <label class="label text-white">first name</label>
+
+                                       {% if user.is_authenticated %}
+                                       <input class="input--style-4" onkeypress='charOnly(event)' type="text" name="first_name" value="{{user.first_name}}">
+                                        {% else %}
+                                       <input class="input--style-4" type="text" name="first_name" value="">
+                                        {% endif %}
+                                    {% comment %} <input class="input--style-4" type="text" name="first_name" value="{{user.firstname}}"> {% endcomment %}
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
-                                    <label class="label">last name</label>
-                                    <input class="input--style-4" type="text" name="last_name">
+                                    <label class="label text-white">last name</label>
+                                    {% if user.is_authenticated %}
+                                    <input class="input--style-4" type="text" name="last_name" value="{{user.last_name}}">
+                                    {% else %}
+                                     <input class="input--style-4" type="text" name="last_name">
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Date</label>
+                            <div class="col-6">
+                                <div>
+                                    <label class="label text-white">Date</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="date">
+                                        <input class="" type="date" name="Date">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Gender</label>
-                                    <div class="p-t-10">
-                                        <label class="radio-container m-r-45">Male
-                                            <input type="radio" checked="checked" name="gender">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">Female
-                                            <input type="radio" name="gender">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-6">
+                                
+                                    <label class="label text-white">Gender</label>
+                                           Male : <input type="radio" checked="checked" name="gender" value="Male">
+                                           Feamle : <input type="radio" name="gender" value="Female">
                         </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Email</label>
+                        <div class="row ml-1">
+                            <div class="col-6">
+                                <div class="input-group text-white">
+                                    <label class="label text-white">Email</label>
                                     <input class="input--style-4" type="email" name="email">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
-                                    <label class="label">Phone Number</label>
-                                    <input class="input--style-4" type="text" name="phone">
+                                    <label class="label text-white">Phone Number</label>
+                                    <input class="input--style-4" onkeypress='validate(event)' type="text" name="phone_number">
                                 </div>
                             </div>
                         </div>
-
-
-                        
-                        <div class="input-group">
-                            <label class="label">Symptoms</label>
-                            <div class="rs-select2 js-select-simple select--no-search">
+                        <Br>
+                        <div class="input-group ml-4">
+                            <label class="label text-white">Symptoms</label>
+                            <div class="col-6">
                                 <select name="subject">
                                     <option disabled="disabled" selected="selected">Choose option</option>
                                     <option>Subject 1</option>
@@ -94,6 +95,77 @@ UVID | Appointment
                 </div>
             </div>
         </div>
+        <h1>{{contry}}</h1>
     </div>
+    
+{% endblock content %}
+{%block js%}
+<script>
 
-{% endblock content %} 
+    window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+        if ( historyTraversal ) {
+            // Handle page restore.
+            window.location.reload();
+        }
+        });
+
+    function validate(evt) {
+       var theEvent = evt || window.event;
+     
+       // Handle paste
+       if (theEvent.type === 'paste') {
+           key = event.clipboardData.getData('text/plain');
+       } else {
+       // Handle key press
+           var key = theEvent.keyCode || theEvent.which;
+           key = String.fromCharCode(key);
+       }
+       var regex = /[0-9]|\./;
+       if( !regex.test(key) ) {
+         theEvent.returnValue = false;
+         if(theEvent.preventDefault) theEvent.preventDefault();
+       }
+     }
+
+
+     function charOnly(evt) {
+       var theEvent = evt || window.event;
+     
+       // Handle paste
+       if (theEvent.type === 'paste') {
+           key = event.clipboardData.getData('text/plain');
+       } else {
+       // Handle key press
+           var key = theEvent.keyCode || theEvent.which;
+           key = String.fromCharCode(key);
+       }
+       var regex =/^[A-Za-z\s]+$/;
+       if( !regex.test(key) ) {
+         theEvent.returnValue = false;
+         if(theEvent.preventDefault) theEvent.preventDefault();
+       }
+     }
+
+
+     var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10){
+                dd='0'+dd
+            } 
+            if(mm<10){
+                mm='0'+mm
+            } 
+
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("date").setAttribute("min", today);
+
+     
+
+
+        
+
+         </script>
+{% endblock js%}

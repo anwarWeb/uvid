@@ -19,8 +19,8 @@ UVID | Contct Us
           
             </div>
             <div class="card-body" style="width: 100%;background-color: #e1f5fe;">
-                <form method="POST">
-
+                <form method="POST" action="/delivery_partner_Save/" enctype="multipart/form-data">
+                    {% csrf_token %}
                   <h2 style="text-align: left; margin-left:20px; color:black; font-weight: bold; font-size:35px;" >Delivery Partner Form</h2>
                     <div class="form-row">
                         <div class="name">Full name</div>
@@ -55,7 +55,7 @@ UVID | Contct Us
                         <div class="name">Upload driving Licence</div>
                         <div class="value">
                             <div class="input-group js-input-file">
-                                <input type="file" name="driving_icence" id="file">
+                                <input type="file" name="driving_licence" id="file">
                             </div>
                            </div>
 

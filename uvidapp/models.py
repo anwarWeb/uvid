@@ -38,3 +38,57 @@ class Jan_Aushadhi_Registration (models.Model):
     
     def __str__(self):
         return self.name  
+
+        
+class DeliveryPartner(models.Model):
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=70, default="")
+    email = models.CharField(max_length=70, default="")
+    message = models.CharField(max_length=500, default="")
+    driving_licence = models.ImageField(upload_to="images/",default="")
+    aadhar_card = models.ImageField(upload_to="images/",default="")
+    pan_card = models.ImageField(upload_to="images/",default="")
+    
+    def __str__(self):
+        return self.name
+
+
+class Appoitement(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=70, default="")
+    Date = models.DateField(blank=True, default='', null=True)
+    gender = models.CharField(max_length=20, default="")
+    email = models.CharField(max_length=50, default="")
+    phone_number = models.CharField(max_length = 11 ,default="")
+    symptom = models.ImageField(upload_to="images/",default="")
+    
+    def __str__(self):
+        return self.name
+
+class Member(models.Model):
+       residing_country = models.CharField(max_length=50)
+       residing_state = models.CharField(max_length=50)
+       residing_city = models.CharField(max_length=50)
+
+       def __str__(self):
+           return self.residing_country
+
+class Country(models.Model):
+        country= models.CharField(max_length=20)
+
+        def __str__(self):
+            return self.country
+
+class State(models.Model):
+        state=models.CharField(max_length=20)
+        country = models.ForeignKey(Country,on_delete=models.CASCADE,default="") 
+
+        def __str__(self):
+            return self.state      
+
+class City(models.Model):
+    city=models.CharField(max_length=20)
+    state=models.ForeignKey(State, on_delete=models.CASCADE,default="")
+
+    def __str__(self):
+        return self.city  
