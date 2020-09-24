@@ -20,18 +20,18 @@ UVID | Contct Us
                     <form action="/contactSave/" method="POST" >
                     {% csrf_token %}
                         <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Name" name="name">
+                            <input class="input--style-3" type="tel" placeholder="Name" name="name" onkeypress='charOnly(event)' required>
                         </div>
                      
                         <div class="input-group">
-                            <input class="input--style-3" type="email" placeholder="Email" name="email">
+                            <input class="input--style-3" type="email" placeholder="Email" name="email" required>
                         </div>
                        
                         <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Phone" name="phone">
+                            <input class="input--style-3" type="tel" maxlength="10" minlength="8"  placeholder="Phone" name="phone" onkeypress='validate(event)' required>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="message" name="message">
+                            <input class="input--style-3" type="text" placeholder="message" name="message" required>
                         </div>
                         <h4 class="title" style=" font-size: 30px; font-weight: bold; color:#ccc;">{{message}}</h4>
                         <div class="p-t-10">
@@ -107,6 +107,46 @@ UVID | Contct Us
       </div>
     </footer>
     
+ <script>
+        function validate(evt) {
+       var theEvent = evt || window.event;
+     
+       // Handle paste
+       if (theEvent.type === 'paste') {
+           key = event.clipboardData.getData('text/plain');
+       } else {
+       // Handle key press
+           var key = theEvent.keyCode || theEvent.which;
+           key = String.fromCharCode(key);
+       }
+       var regex = /[0-9]|\./;
+       if( !regex.test(key) ) {
+         theEvent.returnValue = false;
+         if(theEvent.preventDefault) theEvent.preventDefault();
+       }
+     }
+
+
+     function charOnly(evt) {
+       var theEvent = evt || window.event;
+     
+       // Handle paste
+       if (theEvent.type === 'paste') {
+           key = event.clipboardData.getData('text/plain');
+       } else {
+       // Handle key press
+           var key = theEvent.keyCode || theEvent.which;
+           key = String.fromCharCode(key);
+       }
+       var regex =/^[A-Za-z\s]+$/;
+       if( !regex.test(key) ) {
+         theEvent.returnValue = false;
+         if(theEvent.preventDefault) theEvent.preventDefault();
+       }
+     }
+
+
+         </script>
 
  {% endblock content %} 
 

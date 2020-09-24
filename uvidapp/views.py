@@ -1,11 +1,11 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
-from .models import Contact ,Jan_Aushadhi_Registration, DeliveryPartner,Appoitement,Country
-from django.contrib.auth.models import User
+from .models import Contact ,Jan_Aushadhi_Registration, DeliveryPartner,Appoitement,Department,Doctor
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from .models import *
+from django.core.mail import EmailMessage
+
 
 # Create your views here.
 
@@ -26,27 +26,38 @@ def contactSave(request):
         email = request.POST.get('email', '')
         phone = request.POST.get('phone', '')
         message = request.POST.get('message', '')
+        
+        if "." not in email:
+             return render(request,'contact_us.html',{'message':'Please Enter Valid Email.'})
+
         contact = Contact(name=name, email=email, phone=phone, message=message)
         contact.save()
+     #    email = EmailMessage(name, message, to=['sourabhrathoresr2@gmail.com'])
+     #    email.send()
     return render(request,'contact_us.html',{'message':'Message has been send !'})
 
 
 def appointment(request):
-     department = Department.objects.all()
+     department=Department.objects.all()
      if request.method=="POST":
         first_name = request.POST.get('first_name', '')
         last_name = request.POST.get('last_name', '')
-        Date = request.POST.get('Date', '')
+        Date = request.POST.get('Date',)
         gender = request.POST.get('gender', '')
         email = request.POST.get('email', '')
         phone_number = request.POST.get('phone_number', '')
+        department = request.POST.get('department', '')
+        doctors = request.POST.get('doctors', '')
         symptom = request.POST.get('subject', '')
 
-        appoitement = Appoitement(first_name=first_name, last_name=last_name, Date=Date, gender=gender,email=email,phone_number=phone_number,symptom=symptom)
+        if "." not in email:
+             return render(request,'appointment.html',{'msg':'Please Enter Valid Email.'})
+
+        appoitement = Appoitement(first_name=first_name, last_name=last_name, Date=Date, gender=gender,email=email,phone_number=phone_number,department=department,doctor=doctors,symptom=symptom)
         appoitement.save()
         msg = "Your appoitment has been done"
         return render(request, 'appointment.html',{'msg':msg})
-     return render(request, 'appointment.html',{'departmenet':department})
+     return render(request, 'appointment.html',{'department':department})
 
 def orderTracking(request):
     return render(request, 'order_tracking.html')
@@ -144,3 +155,10 @@ def login_users(request):
 def logout_users(request):
      logout(request)
      return redirect('home')
+
+
+def load_courses(request):
+    department_id = request.GET.get('department')
+    print(department_id)
+    doctors = Doctor.objects.filter(department_id=department_id).order_by('name')
+    return render(request, 'courses_dropdown_list_options.html', {'doctors':doctors})
