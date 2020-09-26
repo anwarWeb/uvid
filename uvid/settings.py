@@ -119,11 +119,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# STATIC_URL = '/static/'
+
+# MEDIA_URL = '/media/'
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
-
+# Media managing
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -135,12 +141,12 @@ LOGOUT_REDIRECT_URL = 'home'
 
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# # Host for sending e-mail.
-# EMAIL_HOST = 'smtp.gmail.com'
-# # Port for sending e-mail.
-# EMAIL_PORT = 587
-# # Optional SMTP authentication information for EMAIL_HOST.
-# EMAIL_HOST_USER = 'sourabhrathoresr2@gmail.com'
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Host for sending e-mail.
+EMAIL_HOST = 'smtp.gmail.com'
+# Port for sending e-mail.
+EMAIL_PORT = 587
+# Optional SMTP authentication information for EMAIL_HOST.
+EMAIL_HOST_USER = 'sourabhrathoresr2@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True

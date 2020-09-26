@@ -31,7 +31,7 @@ UVID | Contct Us
                             <input class="input--style-3" type="tel" maxlength="10" minlength="8"  placeholder="Phone" name="phone" onkeypress='validate(event)' required>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="message" name="message" required>
+                            <input class="input--style-3" type="tel" placeholder="message" name="message" required>
                         </div>
                         <h4 class="title" style=" font-size: 30px; font-weight: bold; color:#ccc;">{{message}}</h4>
                         <div class="p-t-10">
@@ -108,6 +108,15 @@ UVID | Contct Us
     </footer>
     
  <script>
+
+    window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+        if ( historyTraversal ) {
+            // Handle page restore.
+            window.location.reload();
+        }
+        });
+
         function validate(evt) {
        var theEvent = evt || window.event;
      
@@ -144,6 +153,9 @@ UVID | Contct Us
          if(theEvent.preventDefault) theEvent.preventDefault();
        }
      }
+
+
+
 
 
          </script>

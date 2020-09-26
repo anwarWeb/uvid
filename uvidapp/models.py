@@ -69,9 +69,11 @@ class Appoitement(models.Model):
     department = models.CharField(max_length=50, default="")
     doctor = models.CharField(max_length=50, default="")
     symptom = models.ImageField(upload_to="images/",default="")
+    update = models.CharField(max_length=200, default="")
+    
     
     def __str__(self):
-        return self.name
+        return self.first_name
 
 class Member(models.Model):
        residing_country = models.CharField(max_length=50)
@@ -80,4 +82,12 @@ class Member(models.Model):
 
        def __str__(self):
            return self.residing_country
+
+class Blog(models.Model):
+       name = models.CharField(max_length=50)
+       description = models.CharField(max_length=50)
+       images = models.ImageField(upload_to="blog/",default="")
+
+       def __str__(self):
+           return self.name
 
