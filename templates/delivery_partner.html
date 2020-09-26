@@ -21,17 +21,18 @@ UVID | Contct Us
             <div class="card-body" style="width: 100%;background-color: #e1f5fe;">
                 <form method="POST" action="/delivery_partner_Save/" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <h2 style="text-align: left; margin-left:20px; color:black; font-weight: bold; font-size:35px;" >{{message}}</h2>
                   <h2 style="text-align: left; margin-left:20px; color:black; font-weight: bold; font-size:35px;" >Delivery Partner Form</h2>
                     <div class="form-row">
                         <div class="name">Full name</div>
                         <div class="value">
-                            <input class="input--style-6" type="text" name="name">
+                            <input class="input--style-6" type="tel" name="name"  onkeypress='charOnly(event)' required>
                         </div>
                     </div>
                     <div class="form-row">
                       <div class="name">Mobile no.</div>
                       <div class="value">
-                          <input class="input--style-6" type="text" name="phone">
+                          <input class="input--style-6" type="tel" maxlength="10" minlength="8" name="phone" onkeypress='validate(event)' required>
                       </div>
                   </div>
                
@@ -39,7 +40,7 @@ UVID | Contct Us
                         <div class="name">Email address</div>
                         <div class="value">
                             <div class="input-group">
-                                <input class="input--style-6" type="email" name="email" placeholder="example@email.com">
+                                <input class="input--style-6" type="email" name="email" placeholder="example@email.com" required>
                             </div>
                         </div>
                     </div>
@@ -47,7 +48,7 @@ UVID | Contct Us
                         <div class="name">Address</div>
                         <div class="value">
                             <div class="input-group">
-                                <textarea class="textarea--style-6" name="message" placeholder="Address"></textarea>
+                                <textarea class="textarea--style-6" name="message" placeholder="Address" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -55,21 +56,21 @@ UVID | Contct Us
                         <div class="name">Upload driving Licence</div>
                         <div class="value">
                             <div class="input-group js-input-file">
-                                <input type="file" name="driving_licence" id="file">
+                                <input type="file" name="driving_licence" id="file" required>
                             </div>
                            </div>
 
                            <div class="name">Upload Aadhar card</div>
                            <div class="value">
                                <div class="input-group js-input-file">
-                                   <input type="file" name="aadhar_card" id="file">
+                                   <input type="file" name="aadhar_card" id="file" required>
                                </div>
                               </div>
 
                                        <div class="name">Upload PAN card</div>
                                        <div class="value">
                                            <div class="input-group js-input-file">
-                                               <input type="file" name="pan_card" id="file">
+                                               <input type="file" name="pan_card" id="file" required>
                                            </div>
                                           </div>
                                           </div>
@@ -81,6 +82,53 @@ UVID | Contct Us
         </div>
     </div>
 </div>
+<script>
+
+    window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+        if ( historyTraversal ) {
+            // Handle page restore.
+            window.location.reload();
+        }
+        });
+
+        function validate(evt) {
+       var theEvent = evt || window.event;
+     
+       // Handle paste
+       if (theEvent.type === 'paste') {
+           key = event.clipboardData.getData('text/plain');
+       } else {
+       // Handle key press
+           var key = theEvent.keyCode || theEvent.which;
+           key = String.fromCharCode(key);
+       }
+       var regex = /[0-9]|\./;
+       if( !regex.test(key) ) {
+         theEvent.returnValue = false;
+         if(theEvent.preventDefault) theEvent.preventDefault();
+       }
+     }
+
+
+     function charOnly(evt) {
+       var theEvent = evt || window.event;
+     
+       // Handle paste
+       if (theEvent.type === 'paste') {
+           key = event.clipboardData.getData('text/plain');
+       } else {
+       // Handle key press
+           var key = theEvent.keyCode || theEvent.which;
+           key = String.fromCharCode(key);
+       }
+       var regex =/^[A-Za-z\s]+$/;
+       if( !regex.test(key) ) {
+         theEvent.returnValue = false;
+         if(theEvent.preventDefault) theEvent.preventDefault();
+       }
+     }
+</script>
 
 
 {% endblock content %} 

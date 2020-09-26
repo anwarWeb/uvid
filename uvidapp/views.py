@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
 
+
 from .models import Contact, Jan_Aushadhi_Registration, DeliveryPartner, Appoitement, Country, Doctor
 from django.contrib.auth.models import User
 
@@ -8,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
-
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -35,8 +36,8 @@ def contactSave(request):
 
         contact = Contact(name=name, email=email, phone=phone, message=message)
         contact.save()
-     #    email = EmailMessage(name, message, to=['sourabhrathoresr2@gmail.com'])
-     #    email.send()
+        email = EmailMessage(name, message, to=['sourabhrathoresr2@gmail.com'])
+        email.send()
     return render(request,'contact_us.html',{'message':'Message has been send !'})
 
 
@@ -97,6 +98,8 @@ def jan_aushadhi_kendra_Save(request):
         society_registration_certificate =  request.FILES['society_registration_certificate']
         Aushadhi_Registration = Jan_Aushadhi_Registration(name=name,phone=phone, email=email, address=address, land_agreement=land_agreement, aadhar_card=aadhar_card, status_of_applicant=status_of_applicant, pharmacist_certificate=pharmacist_certificate, application_form=application_form, pan_card=pan_card, society_registration_certificate=society_registration_certificate )
         Aushadhi_Registration.save()
+        message = "Your Application has been submitted"
+        return render(request,'jan_asuhadhi_kendra.html',{'message':message})
      return render(request,'jan_asuhadhi_kendra.html')
 
 def deliveryPartner(request):
@@ -114,6 +117,8 @@ def deliveryPartnerSave(request):
         pan_card = request.FILES['pan_card']
         deliveryPartner = DeliveryPartner(name=name,phone=phone, email=email, message=message, driving_licence=driving_licence, aadhar_card=aadhar_card, pan_card=pan_card,)
         deliveryPartner.save()
+        message = "Your Application has been submitted"
+        return render(request,'delivery_partner.html',{'message':message})
      return render(request,'delivery_partner.html')
 
 def signup(request):
@@ -167,3 +172,21 @@ def load_courses(request):
     print(department_id)
     doctors = Doctor.objects.filter(department_id=department_id).order_by('name')
     return render(request, 'courses_dropdown_list_options.html', {'doctors':doctors})
+
+@login_required(login_url='/logout_users/')
+def blog(request):
+     blogs = Blog.objects.all()
+     return render(request,'blog.html',{'blog':blogs})
+
+@login_required(login_url='/logout_users/')
+def tracker(request):
+     appoitment = Appoitement.objects.all()
+     if request.method=="POST":
+          appoitment = Appoitement.objects.all()
+          id = request.POST.get('id', '')
+          email = request.POST.get('email', '')
+          return render(request,'order_tracking.html',{'id':id,'email':email, 'appoitment':appoitment})
+     return render(request,'order_tracking.html')
+     
+
+     

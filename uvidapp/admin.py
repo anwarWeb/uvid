@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.db import models
 
-from .models import Doctor, Contact, Jan_Aushadhi_Registration, DeliveryPartner, Appoitement, Member, Country, State, City, Department
-
+from .models import Doctor,Contact,Jan_Aushadhi_Registration,DeliveryPartner,Appoitement,Member,Department,Blog
 
 
 # Register your models here.
@@ -118,7 +117,7 @@ class DeliveryPartnerAdmin(admin.ModelAdmin):
 admin.site.register(DeliveryPartner,DeliveryPartnerAdmin)
 
 class AppoitementAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'Date','gender','email','phone_number','department','doctor','symptom',)
+    list_display = ('first_name', 'last_name', 'Date','gender','email','phone_number','department','doctor','symptom','update')
 admin.site.register(Appoitement,AppoitementAdmin)
 
 
@@ -126,9 +125,10 @@ class MemberAdmin(admin.ModelAdmin):
     list_display = ('residing_country', 'residing_country', 'residing_country',)
 admin.site.register(Member,MemberAdmin)
 
-
-
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ('name',)
 admin.site.register(Department,DepartmentAdmin)
 
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('name','description','images')
+admin.site.register(Blog,BlogAdmin)

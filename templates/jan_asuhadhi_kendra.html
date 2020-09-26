@@ -7,10 +7,6 @@ UVID | Contct Us
 {% endblock title %}
 
 {% block content %}     
-
-
-
-
       <br><br><br><br>
       <br><br><br>
     <section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb" id="about-section" > 
@@ -48,19 +44,20 @@ UVID | Contct Us
                   <form method="POST" action="/jan_aushadhi_kendra_Save/" enctype="multipart/form-data">
                   {% csrf_token %}
                     <div class="card-heading">
+                    <h2 class="text-white" style="text-align: left; margin-left:20px"  >{{message}}</h2>
                       <h2 style="text-align: left; margin-left:20px" >Registration Form</h2>
                   </div>
 
                       <div class="form-row">
                           <div class="name">Full name</div>
                           <div class="value">
-                              <input class="input--style-6" type="text" name="name">
+                              <input class="input--style-6" type="tel"  name="name"  onkeypress='charOnly(event)' required>
                           </div>
                       </div>
                       <div class="form-row">
                         <div class="name">Mobile no.</div>
                         <div class="value">
-                            <input class="input--style-6" type="text" name="phone">
+                            <input class="input--style-6" maxlength="10" minlength="8" type="tel" onkeypress='validate(event)' name="phone" required>
                         </div>
                     </div>
                  
@@ -68,7 +65,7 @@ UVID | Contct Us
                           <div class="name">Email address</div>
                           <div class="value">
                               <div class="input-group">
-                                  <input class="input--style-6" type="email" name="email" placeholder="example@email.com">
+                                  <input class="input--style-6" type="tel" name="email" placeholder="example@email.com" required>
                               </div>
                           </div>
                       </div>
@@ -76,7 +73,7 @@ UVID | Contct Us
                           <div class="name">Address</div>
                           <div class="value">
                               <div class="input-group">
-                                  <textarea class="textarea--style-6" name="address" placeholder="Address"></textarea>
+                                  <textarea class="textarea--style-6" name="tel" placeholder="Address" required></textarea>
                               </div>
                           </div>
                       </div>
@@ -84,7 +81,7 @@ UVID | Contct Us
                           <div class="name">Upload Land agreement</div>
                           <div class="value">
                               <div class="input-group js-input-file">
-                                  <input  type="file" name="land_agreement" id="file">
+                                  <input  type="file" name="land_agreement" id="file" required>
                               </div>
                              </div>
 
@@ -100,28 +97,28 @@ UVID | Contct Us
                                 <div class="name">Upload Status of applicant</div>
                                 <div class="value">
                                     <div class="input-group js-input-file">
-                                        <input  type="file" name="status_of_applicant" id="file">
+                                        <input  type="file" name="status_of_applicant" id="file" required>
                                         
                                     </div>
                                    </div>
                                    <div class="name">Upload Pharmacist certificate</div>
                                    <div class="value">
                                        <div class="input-group js-input-file">
-                                           <input  type="file" name="pharmacist_certificate" id="file">
+                                           <input  type="file" name="pharmacist_certificate" id="file" required>
                                            
                                        </div>
                                       </div>
                                       <div class="name">Upload Application form</div>
                                       <div class="value">
                                           <div class="input-group js-input-file">
-                                              <input  type="file" name="application_form" id="file">
+                                              <input  type="file" name="application_form" id="file" required>
                                               
                                           </div>
                                          </div>
                                          <div class="name">Upload PAN card</div>
                                          <div class="value">
                                              <div class="input-group js-input-file">
-                                                 <input  type="file" name="pan_card" id="file">
+                                                 <input  type="file" name="pan_card" id="file" required>
                                                  {% comment %} <label class="label--file" for="file">Choose file</label>
                                                  <span class="input-file__info">No file chosen</span> {% endcomment %}
                                              </div>
@@ -129,7 +126,7 @@ UVID | Contct Us
                                             <div class="name">Upload Society registration certificate</div>
                                             <div class="value">
                                                 <div class="input-group js-input-file">
-                                                    <input type="file" name="society_registration_certificate" id="file">
+                                                    <input type="file" name="society_registration_certificate" id="file" required>
                                                     {% comment %} <label class="label--file" for="file">Choose file</label>
                                                     <span class="input-file__info">No file chosen</span> {% endcomment %}
                                                 </div>
@@ -147,6 +144,53 @@ UVID | Contct Us
   </div>
    </section>
 
+<script>
+
+    window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+        if ( historyTraversal ) {
+            // Handle page restore.
+            window.location.reload();
+        }
+        });
+
+        function validate(evt) {
+       var theEvent = evt || window.event;
+     
+       // Handle paste
+       if (theEvent.type === 'paste') {
+           key = event.clipboardData.getData('text/plain');
+       } else {
+       // Handle key press
+           var key = theEvent.keyCode || theEvent.which;
+           key = String.fromCharCode(key);
+       }
+       var regex = /[0-9]|\./;
+       if( !regex.test(key) ) {
+         theEvent.returnValue = false;
+         if(theEvent.preventDefault) theEvent.preventDefault();
+       }
+     }
+
+
+     function charOnly(evt) {
+       var theEvent = evt || window.event;
+     
+       // Handle paste
+       if (theEvent.type === 'paste') {
+           key = event.clipboardData.getData('text/plain');
+       } else {
+       // Handle key press
+           var key = theEvent.keyCode || theEvent.which;
+           key = String.fromCharCode(key);
+       }
+       var regex =/^[A-Za-z\s]+$/;
+       if( !regex.test(key) ) {
+         theEvent.returnValue = false;
+         if(theEvent.preventDefault) theEvent.preventDefault();
+       }
+     }
+</script>
 
 
 {% endblock content %} 
